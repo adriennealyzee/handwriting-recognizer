@@ -22,7 +22,8 @@ def job_function():
     imgpath = "maxmspimages/" + imgfile
     print "imgpath", imgpath
     displayint = performRecognition.performRecognitionFn(imgpath)
-    displaystring = "Welcome! x " + displayint
+    # displaystring = "Welcome! x " + displayint
+    displaystring = displayint
 
     # displaystring = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 

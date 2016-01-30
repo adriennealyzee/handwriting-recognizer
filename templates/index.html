@@ -12,32 +12,43 @@
     console.log("aklsdjf");
 
     function update_values() {
-                $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-                $.getJSON($SCRIPT_ROOT+"/_stuff",
-                    function(data) {
-                        $("#imgnum").text(data.imgnum)
-                    });
-            }
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+        $.getJSON($SCRIPT_ROOT+"/_stuff",
+            function(data) {
+                $("#imgnum").text(data.imgnum);
+                console.log(data.imgnum);
+                var age = Number(data.imgnum);
+                
+                if (age < 29){
+                    console.log("less than 29");
+                    str = "According to U.S. Census Bureau, of the people in your age range, 18-29, 45% of eligible voters voted in the 2012 election."
 
-    
+                } else if (age > 29 && age < 45){
+                    console.log("29 - 45");
+                    str = "According to U.S. Census Bureau, of the people in your age range, 30-44, 59.5% of eligible voters voted in the 2012 election."
 
-    function myTimer() {
-        var d = new Date();
-        document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+                } else if (age > 45 && age < 65){
+                    console.log("29 - 45");
+                    str = "According to U.S. Census Bureau, of the people in your age range, 45-64, 67.9% of eligible voters voted in the 2012 election."
+
+                } else{
+                    console.log("> 65");
+                    str = "According to U.S. Census Bureau, of the people in your age range, 65+, 72% of eligible voters voted in the 2012 election."   
+                }
+                $("#respectivetext").text(str);
+            });
     }
-
 
     setInterval(update_values, 1000);
     
-
     </script>
  
 </head>
  
 <body>
 
-    <h3>Homage</h3>
     <div id="demo"></div>
     <div id="imgnum"></div>
+    <h1><div id="respectivetext"></div></h1>
 
 </body>

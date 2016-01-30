@@ -31,8 +31,14 @@ def performRecognitionFn(imgfile):
     clf = joblib.load("digits_cls.pkl")
 
     # Read the input image 
-    im = cv2.imread(imgfile)
+    # im = cv2.imread(imgfile)
     im_pil = Image.open(imgfile)
+
+    # cropping
+    box = (140,120,400,340)
+    im_pil = im_pil.crop(box)
+
+    im = np.array(im_pil)
 
     # Convert to grayscale and apply Gaussian filtering
     im_gray = cv2.cvtColor(im, cv2.COLOR_BGR2GRAY)
@@ -111,8 +117,8 @@ def performRecognitionFn(imgfile):
         theInt += intitem
 
     
-    cv2.imshow("Resulting Image with Rectangular ROIs", im)
-    cv2.waitKey()
+    # cv2.imshow("Resulting Image with Rectangular ROIs", im)
+    # cv2.waitKey()
     return theInt
 
 
@@ -122,6 +128,6 @@ def performRecognitionFn(imgfile):
 
 
 if __name__ == "__main__":
-    imgfile = "test_images/jeremy10.jpg"
-    print performRecognitionFn(imgfile)
+    filepath = "test_images/68.jpg"
+    print performRecognitionFn(filepath)
 
