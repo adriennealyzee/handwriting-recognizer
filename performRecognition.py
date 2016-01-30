@@ -67,18 +67,18 @@ def performRecognitionFn(imgfile):
         # append bounding box
         # digit_alphabet_bounding_boxes.append((v1,v2))
 
-        print "v1"
-        print rect[0]
-        print rect[1]
-        print " - - - "
-        print "v2"
-        print rect[0] + rect[2]
-        print rect[1] + rect[3]
-        print " - - - "
-        print "rect[0]", rect[0]
-        print "rect[1]", rect[1]
-        print "rect[2]", rect[2]
-        print "rect[3]", rect[3]
+        # print "v1"
+        # print rect[0]
+        # print rect[1]
+        # print " - - - "
+        # print "v2"
+        # print rect[0] + rect[2]
+        # print rect[1] + rect[3]
+        # print " - - - "
+        # print "rect[0]", rect[0]
+        # print "rect[1]", rect[1]
+        # print "rect[2]", rect[2]
+        # print "rect[3]", rect[3]
         
 
         box = (rect[0], rect[1], rect[0] + rect[2], rect[1] + rect[3])
@@ -122,6 +122,6 @@ def performRecognitionFn(imgfile):
 
 
 if __name__ == "__main__":
-    imgfile = "forrest.jpg"
+    imgfile = "test_images/jeremy10.jpg"
     print performRecognitionFn(imgfile)
 
