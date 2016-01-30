@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>team x</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+ 
+    <script type="text/javascript">
+    console.log("aklsdjf");
+
+    function update_values() {
+                $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+                $.getJSON($SCRIPT_ROOT+"/_stuff",
+                    function(data) {
+                        $("#imgnum").text(data.imgnum)
+                    });
+            }
+
+    var myVar = setInterval(update_values, 1000);
+
+    function myTimer() {
+        var d = new Date();
+        document.getElementById("demo").innerHTML = d.toLocaleTimeString();
+    }
+
+    myTimer();
+    </script>
+ 
+</head>
+ 
+<body>
+
+    <h3>Homage</h3>
+    <div id="demo"></div>
+    <div id="imgnum"></div>
+
+</body>
