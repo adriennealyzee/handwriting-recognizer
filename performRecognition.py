@@ -35,7 +35,8 @@ def performRecognitionFn(imgfile):
     im_pil = Image.open(imgfile)
 
     # cropping
-    box = (140,120,400,340)
+    box = (500,500,800,700)
+    # box_pg = (500,700,800,800)
     im_pil = im_pil.crop(box)
 
     im = np.array(im_pil)
@@ -128,6 +129,8 @@ def performRecognitionFn(imgfile):
 
 
 if __name__ == "__main__":
-    filepath = "test_images/68.jpg"
+    # filepath = "maxmspimages/5565907.jpg"
+    # filepath = "jeremy_boxes.jpg"
+    filepath = "python_images/1454699465.jpg"
     print performRecognitionFn(filepath)
 

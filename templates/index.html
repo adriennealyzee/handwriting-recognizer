@@ -6,36 +6,90 @@
 <head>
     <title>team x</title>
 
+    <style type="text/css">
+    .blackbox{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 45%;
+        background: #000000;
+        height: 100%;
+        float: left;
+        display: inline;
+    }
+
+    .right_container{
+        float: right;
+        width: 40%;
+        padding-right: 90px;
+        margin-right: 90px;
+    }
+    </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
  
     <script type="text/javascript">
-    console.log("aklsdjf");
+
 
     function update_values() {
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
         $.getJSON($SCRIPT_ROOT+"/_stuff",
             function(data) {
                 $("#imgnum").text(data.imgnum);
-                console.log(data.imgnum);
-                var age = Number(data.imgnum);
                 
-                if (age < 29){
-                    console.log("less than 29");
-                    str = "According to U.S. Census Bureau, of the people in your age range, 18-29, 45% of eligible voters voted in the 2012 election."
+                console.log(data.imgnum);
+                console.log(data.imgnum2);
 
-                } else if (age > 29 && age < 45){
-                    console.log("29 - 45");
-                    str = "According to U.S. Census Bureau, of the people in your age range, 30-44, 59.5% of eligible voters voted in the 2012 election."
+                // console.log(data.imgnum);
+                var age = Number(data.imgnum);
+                // var pre_pg = String(data.imgnum);
+                // var pg = (pre_pg.split("")).length;
+                var pg = Number(data.imgnum);
+                
 
-                } else if (age > 45 && age < 65){
-                    console.log("29 - 45");
-                    str = "According to U.S. Census Bureau, of the people in your age range, 45-64, 67.9% of eligible voters voted in the 2012 election."
+                var str = "";
+                var img_chart = "";
 
+                if (pg >= 7 && pg <= 77){
+                    if (age > 18 && age <= 29){
+                        console.log("less than 29");
+                        // str = "According to U.S. Census Bureau, of the people in your age range, 18-29, 45% of eligible voters voted in the 2012 election.";
+                        img_chart = "/static/images/GraphO18.png";
+
+                    } else if (age > 29 && age <= 44){
+                        console.log("29 - 45");
+                        // str = "According to U.S. Census Bureau, of the people in your age range, 30-44, 59.5% of eligible voters voted in the 2012 election."
+                        img_chart = "/static/images/GraphO20.png";
+
+                    } else if (age >= 45 && age < 65){
+                        console.log("29 - 45");
+                        // str = "According to U.S. Census Bureau, of the people in your age range, 45-64, 67.9% of eligible voters voted in the 2012 election."
+                        img_chart = "/static/images/GraphO45.png";
+                    } else if (age >= 65){
+                        // str = "According to U.S. Census Bureau, of the people in your age range, 45-64, 67.9% of eligible voters voted in the 2012 election."
+                        img_chart = "/static/images/GraphO65.png";
+                    }
+                } else if (pg >= 77 && pg <= 777){
+                    str = "40% of the Domino's domestic sales come from orders through desktop computers, smartphones, and tablets. In April the U.S. Department of Commerce reported that Americans spent $52.3 billion at restaurants and bars in March, and $49.7 billion in grocery stores. It is the first time grocery spending has lagged behind fast food sales since the government started tracking statistics nearly 25 years ago.Some 795 million people in the world do not have enough food to lead a healthy active life. That's about one in nine people on earth."
+                } else if (pg >= 777 && pg <= 7777){
+                    str = "It turns out that when I graduated from high school, I had already used up 93% of my in-person parent time. I’m now enjoying the last 5% of that time. We’re in the tail end. It’s a similar story with my two sisters. After living in a house with them for 10 and 13 years respectively, I now live across the country from both of them and spend maybe 15 days with each of them a year. Hopefully, that leaves us with about 15% of our total hangout time left. <p /> The same often goes for old friends. In high school, I sat around playing hearts with the same four guys about five days a week. In four years, we probably racked up 700 group hangouts. Now, scattered around the country with totally different lives and schedules, the five of us are in the same room at the same time probably 10 days each decade. The group is in its final 7%. <p /> So what do we do with this information? <p/> Setting aside my secret hope that technological advances will let me live to 700, I see three takeaways here: <p />1) Living in the same place as the people you love matters. I probably have 10X the time left with the people who live in my city as I do with the people who live somewhere else. <p /> 2) Priorities matter. Your remaining face time with any person depends largely on where that person falls on your list of life priorities. Make sure this list is set by you—not by unconscious inertia. <p /> 3) Quality time matters. If you’re in your last 10% of time with someone you love, keep that fact in the front of your mind when you’re with them and treat that time as what it actually is: precious."
+                } else if (pg >= 7777 && pg <= 77777){
+                    str = "As of the most recent reported period, the number of internet users worldwide was 3.17 billion, up from 2.94 billion in the previous year."
+                } else if (pg >= 77777 && pg <= 777777){
+                    str = "7 in 10 girls believe that they are not good enough or don’t measure up in some way, including their looks, performance in school and relationships with friends and family members.<p /> Nine out of ten times when I feel paralyzed, it’s because I doubt myself. <p /> Sometimes I doubt my knowledge—whether I truly know enough to move forward. Sometimes I doubt the choices I’ve already made, as if I can somehow find a sense of control in rehashing what I’ve done and deciding how to do it better in the future. <p /> Other times I doubt my instincts. I think I know what’s right for me, but my mind decides to split and take sides, creating a nagging sense of internal conflict over what I actually want to do. <p />I’ve mostly dealt with this as it pertains to my dreams, and it’s partially because I’m terrified of doing the wrong thing and somehow ruining everything I’ve been working toward. I don’t want to say the wrong thing, or make the wrong decision and then have to take responsibility for the outcome of my choice. <p />It feels easier not to choose at all."
+                } else if (pg >= 777777 && pg <= 7777777){
+                    str = "Half of Americans (48%) say they don’t get enough sleep, but less than half of them take any one specific action to help them get better sleep.<p /> Close to one-third of adults (31%) always turn to coffee or caffeinated beverages as their way to make up for lost sleep."
+                } else if  (pg >= 7777777 && pg <= 77777777){
+                    str = "Fill in how many months you have left."
+                    img_chart = "/static/images/monthsleft.jpeg";
                 } else{
-                    console.log("> 65");
-                    str = "According to U.S. Census Bureau, of the people in your age range, 65+, 72% of eligible voters voted in the 2012 election."   
+                    str = "";
+                    img_chart = "";
                 }
-                $("#respectivetext").text(str);
+
+                $("#respectivetext").html(str);
+                // $("#respectivetext").text(str);
+                // $("#chart").attr('src', img_chart);
+                $("#chart").html('<img src="' + img_chart + '" height="200" width="300" border="0"/>')
             });
     }
 
@@ -46,9 +100,11 @@
 </head>
  
 <body>
-
-    <div id="demo"></div>
-    <div id="imgnum"></div>
-    <h1><div id="respectivetext"></div></h1>
-
+    <div class="blackbox">x</div>
+    <div class="right_container">
+        <div id="demo"></div>
+        <div id="imgnum"></div>
+        <h1><div id="respectivetext"></div></h1>
+        <div id="chart"></div>
+    </div>
 </body>

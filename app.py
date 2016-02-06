@@ -1,5 +1,6 @@
 from flask import Flask, render_template, jsonify, request
 import performRecognition
+import performRecognition_page
 import atexit
 from apscheduler.scheduler import Scheduler
 import datetime
@@ -11,39 +12,41 @@ app = Flask(__name__)
 cron = Scheduler(daemon=True)
 cron.start() # Explicitly kick off the background thread
 
-displaystring = "DISPLAYSTRING222"
+displaystring_age = "displaystring_age"
+displaystring_pagenum = "displaystring_pagenum"
 
 @cron.interval_schedule(seconds=1)
 def job_function():
     print "inside job function"
-    global displaystring
-    imgfile = performRecognition.pullLatestFile("maxmspimages")
+    global displaystring_age
+    global displaystring_pagenum
+    imgfile = performRecognition.pullLatestFile("python_images")
+    imgpath = "python_images/" + imgfile
 
-    imgpath = "maxmspimages/" + imgfile
     print "imgpath", imgpath
-    displayint = performRecognition.performRecognitionFn(imgpath)
+    displaystring_age = performRecognition.performRecognitionFn(imgpath)
+    displaystring_pagenum = performRecognition_page.performRecognitionFn(imgpath)
     # displaystring = "Welcome! x " + displayint
-    displaystring = displayint
-
     # displaystring = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
     # for i in range(0,5):
         
         # displaystring = i
-    print "job fn displaystring ", displaystring
+    print "job fn displaystring ", displaystring_age
+    print "job fn displaystring ", displaystring_pagenum
 
 # Shutdown your cron thread if the web process is stopped
 atexit.register(lambda: cron.shutdown(wait=False))
 
 @app.route('/_stuff', methods= ['GET'])
 def stuff():
-    global displaystring
-    print "inside /_stuff displaystring", displaystring
-    # print "inside stuff"
-    # imgnum = displaystring
-    # print imgnum
-    # return jsonify(imgnum=imgnum)
-    return jsonify(imgnum=displaystring)
+    global displaystring_age
+    global displaystring_pagenum
+
+    print "inside /_stuff displaystring", displaystring_age
+    print "inside /_stuff displaystring", displaystring_pagenum
+    # return jsonify(imgnum=displaystring)
+    return jsonify(imgnum=displaystring_age, imgnum2=displaystring_pagenum)
 
 # @app.before_request
 # def before_request():
@@ -53,7 +56,8 @@ def stuff():
 
 @app.route("/")
 def main():
-    global displaystring
+    global displaystring_age
+    global displaystring_pagenum
     # imgfile = "adrienne4.jpg"
     print "inside main"
     #while listening:
